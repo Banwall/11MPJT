@@ -1,5 +1,6 @@
 package com.model2.mvc.web.product;
 
+import java.io.File;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
@@ -57,14 +59,17 @@ public class ProductController {
 	}
 	
 	@RequestMapping( value = "addProduct" , method=RequestMethod.POST )
-	public String addProduct( @ModelAttribute("product") Product product) throws Exception {
+	public String addProduct( @ModelAttribute("product") Product product,
+								@RequestParam("fileName") MultipartFile file, Model model) throws Exception {
 		
 		System.out.println("/product/addProduct : POST ");
 		//Business Logic
 		productService.addProduct(product);
 		
-		System.out.println("아마 ? 추가 된 product :: " + product);
+		String realPath = "C:\\Users\\aiacademy\\git\\09project\\09.Model2MVCShop(jQuery)\\src\\main\\webapp\\resources\\upload";
 		
+		File folder = new File(realPath);
+		file.transferTo(new File(folder, product.getFileName()));
 		return "forward:/product/addProduct.jsp";
 	}
 	

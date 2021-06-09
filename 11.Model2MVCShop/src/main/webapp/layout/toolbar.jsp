@@ -56,8 +56,8 @@
 		                         <span class="caret"></span>
 		                     </a>
 		                     <ul class="dropdown-menu">
-		                         <li><a href="/product/addProduct">판매상품등록</a></li>
-		                         <li><a href="#">판매상품관리</a></li>
+		                         <li><a href="#">판매상품등록</a></li>
+		                         <li id="manage"><a href="#">판매상품관리</a></li>
 		                         <li class="divider"></li>
 		                         <li><a href="#">etc..</a></li>
 		                     </ul>
@@ -118,10 +118,22 @@
 			}); 
 		 });
 		
-		//=============  개인정보조회회 Event  처리 =============	
+		//=============  개인정보조회회 Event  처리 =============
 	 	$( "a:contains('개인정보조회')" ).on("click" , function() {
 	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+		});
+		
+		//============== 판매상품등록 Event 처리 ===============
+	 	$( "a:contains('판매상품등록')" ).on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href","/product/addProduct");
+		});
+		
+		//============== 판매상품관리 Event 처리 ===============
+	 	$( "#manage" ).on("click" , function() {
+	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$(self.location).attr("href", "/product/listProduct?menu=manage")
 		});
 		
 	</script>  

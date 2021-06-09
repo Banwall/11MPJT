@@ -13,8 +13,6 @@
 
 <script type="text/javascript">
 	
-	
-	
 	function fncUpdateProductView() {
 		
 		var prodNo = $( "td.prodNo" ).text();

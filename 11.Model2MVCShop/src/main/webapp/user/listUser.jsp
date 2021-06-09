@@ -54,9 +54,9 @@
 		//============= "八祸"  Event  贸府 =============	
 		 $(function() {
 			 //==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 //$( "button.btn.btn-default" ).on("click" , function() {
-			//	fncGetList(1);
-			//});
+			 $( "button.btn.btn-default" ).on("click" , function() {
+			 	fncGetList(1);
+			 });
 		 });
 		
 		

@@ -79,7 +79,7 @@
 	   
 	   $( function() {
 	      
-	      $( ".btn btn-primary btn:contains('취 소')").on("click", function() {
+	      $( ".btn btn-primary btn:contains('취소')").on("click", function() {
 	          
 	    	  window.history.back();
 	      });
@@ -88,7 +88,7 @@
 	   
 	   $( function() {
 		
-		   $('#manuDate').datepicker();
+		   $('#manuDate').datepicker( { dateFormat : "yy/mm/dd" } );
 		   
 	   })
 	   
@@ -108,7 +108,7 @@
 	
 		<h1 class="bg-primary text-center">상 품 등 록</h1>
 	
-	<form class="form-horizontal">
+	<form class="form-horizontal" enctype="multipart/form-data">
 		
 		  <div class="form-group">
 		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상 품 명</label>
@@ -141,7 +141,7 @@
 		  <div class="form-group">
 		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">이미지 파일</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="fileName" name="fileName" placeholder="이미지 파일경로를 올려주세요" readonly/>
+		      <input type="file" class="form-control-file border" name="fileName">
 		    </div>
 		  </div>
 	
@@ -153,5 +153,7 @@
 		  </div>
 	
 	</form>
-	</body>
+	</div>
+	
+</body>
 </html>
