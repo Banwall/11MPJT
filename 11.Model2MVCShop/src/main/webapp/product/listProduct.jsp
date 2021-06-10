@@ -169,7 +169,7 @@
             <div class="caption" align="center">
               <h3>${ product.prodName }</h3>
               <p>&#8361;${ product.price }</p>
-              <p><a href="/product/getProduct?prodNo=${product.prodNo}&menu=search&currentPage=${search.currentPage}" class="btn btn-primary" role="button">상세보기</a> 
+              <p><a href="/product/getProduct?prodNo=${product.prodNo}&menu=${menu}&currentPage=${search.currentPage}" class="btn btn-primary" role="button">상세보기</a> 
               <a href="/purchase/addPurchaseView/${ product.prodNo }" class="btn btn-default" role="button">구매하기</a></p>
             </div>
           </div>

@@ -44,18 +44,21 @@
 	 </update>
 	 
 	 <select  id="getProductList"  parameterType="search"	resultMap="productSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT p.prod_name , p.price, p.prod_no, t.TRAN_STATUS_CODE, p.reg_date
-											FROM product p, transaction t
+	  	SELECT 
+		prod_no, prod_name, price, prod_detail, tran_status_code, image_file, row_seq
+		FROM ( SELECT inner_table.prod_no, inner_table.prod_name, inner_table.price,
+						 inner_table.prod_detail,inner_table.tran_status_code,inner_table.image_file,
+						 ROWNUM AS row_seq
+				FROM ( SELECT p.prod_no, p.prod_name, p.price, p.prod_detail, t.tran_status_code, p.image_file
+						FROM product p, transaction t
 											<where>
 											p.prod_no = t.tran_no(+)
 											<if test="searchCondition != null">
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				AND prod_name = #{searchKeyword}
+										 				AND prod_name LIKE #{searchKeyword}%
 													</if>
 													<if test="searchCondition == 2 and searchKeyword !='' ">
-										 				AND price = #{searchKeyword}
+										 				AND price LIKE #{searchKeyword}%
 													</if>
 											</if>
 											</where>

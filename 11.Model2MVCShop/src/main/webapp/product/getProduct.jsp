@@ -1,236 +1,137 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+ 
 
 <html>
 <head>
-<title>ìƒí’ˆìƒì„¸ì¡°íšŒ</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<meta charset="EUC-KR">
+	
+	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+    <link href="/css/animate.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   
+    <!-- Bootstrap Dropdown Hover JS -->
+    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-
-<script type="text/javascript">
-	
-	function fncUpdateProductView() {
-		
-		var prodNo = $( "td.prodNo" ).text();
-		
-		$('form').attr("method", "GET").attr("action", "/product/updateProduct");
-		self.location ="/product/updateProduct?prodNo="+prodNo;
-		
-	}
-	
-	$( function() {
-	
-		$( "td.ct_btn01:contains('ìˆ˜ì •')").on("click", function() {
+	<script type="text/javascript">
+		$(function(){
 			
-			$( fncUpdateProductView() ).submit();
-		});
-		
-	});
-	
-	function fncListProduct() {
-		
-		$( 'form' ).attr("method", "POST").attr("action", "/product/listProduct").submit();
-		self.location ="/product/listProduct?menu=manage";
-	}
-	
-	$( function() {
-		
-		$( "td.ct_btn01:contains('í™•ì¸')").on("click", function() {
+			var prodNo = $( "#prodNo" ).text();
 			
-			fncListProduct();
-		});
-		
-	});
-	
+			$("#ok").on("click",function(){
+				$(self.location).attr("href","/product/updateProduct?prodNo=10000");
+			})
+			$("#addPurchase").on("click",function(){
+				
+				if(${product.proTranCode == null}){
+					alert("»óÇ°±¸¸Å");
+					$(self.location).attr("href","/purchase/addPurchaseView?prodNo=${product.prodNo}");
+				}else{
+					alert("Àç°í°¡ ¾ø½À´Ï´Ù.");
+				}
+			})
+			$("#reset").on("click",function(){
+				$(self.location).attr("href","/product/listProduct?menu=${menu}");
+			})
+		})
+	</script>
 
-</script>
-
+<style>
+        body {
+            padding-top : 70px;
+        }
+        
+        #fileName {
+			  width: 200px;
+			  height: 150px;
+			  object-fit: cover;
+			}
+</style>
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
+<body>
 
-<form name = "detailForm">
-
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37">
-			<img src="/images/ct_ttl_img01.gif" width="15" height="37">
-		</td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left:10px;">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td width="93%" class="ct_ttl01">ìƒí’ˆìƒì„¸ì¡°íšŒ</td>
-				<td width="20%" align="right">&nbsp;</td>
-			</tr>
-		</table>
-		</td>
-		<td width="12" height="37"><img src="/images/ct_ttl_img03.gif" width="12" height="37"></td>
-	</tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:13px;">
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">
-			ìƒí’ˆë²ˆí˜¸ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="105" class="prodNo">${product.prodNo}</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
+	<jsp:include page="/layout/toolbar.jsp" />
 	
-	<tr>
-		<td width="104" class="ct_write">
-			ìƒí’ˆëª… <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${product.prodName}</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">
-			ìƒí’ˆì´ë¯¸ì§€ <img 	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<img src="${product.fileName}"/>
-		</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">
-			ìƒí’ˆìƒì„¸ì •ë³´ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${product.prodDetail}</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">ì œì¡°ì¼ì</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${product.manuDate}</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">ê°€ê²©</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${product.price}</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">ë“±ë¡ì¼ì</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${product.regDate}</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top:10px;">
-	<tr>
-		<td width="53%"></td>
-		<td align="right">
+	<div class="container">
+	
+		<div class="page-header">
+	       <h3 class=" text-info">»óÇ°»ó¼¼Á¶È¸</h3>
+	    </div>
+	
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong id = "prodNo">»óÇ°¹øÈ£</strong></div>
+			<div class="col-xs-8 col-md-4">${product.prodNo}</div>
+		</div>
 		
-		<c:if test="${empty menu}">
-			<table border="0" cellspacing="0" cellpadding="0">
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="javascript:history.go(-1);">í™•ì¸</a>
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-			</table>
-		</c:if>
-		<c:if test="${menu == 'manage'}">
-		<!-- ìƒí’ˆ ìˆ˜ì • -->
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- /////////////////////////////////////////////////////////////////////
-						<a href="/product/updateProduct?prodNo=${product.prodNo} ">ìˆ˜ì •</a>
-						///////////////////////////////////////////////////////////////////// -->
-						ìˆ˜ì •
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-					<td width="30"></td>					
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- ////////////////////////////////////////////////////////////
-						<a href="javascript:history.go(-1);">í™•ì¸</a>
-						//////////////////////////////////////////////////////////// -->
-						í™•ì¸
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-				</tr>
-			</table>
-		</c:if>
-		<c:if test="${menu == 'search' }">
-		<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<c:if test="${!empty sessionScope.user }">
-						<td width="17" height="23">
-							<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-						</td>
-						<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-							<a href="/addPurchaseView.do?prodNo=${product.prodNo }">êµ¬ë§¤</a>
-						</td>
-						<td width="14" height="23">
-							<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-						</td>
-					</c:if>
-					<td width="30"></td>					
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="javascript:history.go(-1);">ì´ì „</a>
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-				</tr>
-			</table>
-		</c:if>
-	</tr>
-</table>
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ°¸í</strong></div>
+			<div class="col-xs-8 col-md-4">${product.prodName}</div>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ° ÀÌ¹ÌÁö</strong></div>
+			<img id="fileName" src = "/images/uploadFiles/${product.fileName}" alt="»çÁø¾øÀ½"/>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>»óÇ° »ó¼¼Á¤º¸</strong></div>
+			<div class="col-xs-8 col-md-4">${product.prodDetail}</div>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2"><strong>Á¦Á¶ÀÏÀÚ</strong></div>
+			<div class="col-xs-8 col-md-4">${product.manuDate}</div>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>°¡°İ</strong></div>
+			<div class="col-xs-8 col-md-4">
+				${product.price} <i class="glyphicon glyphicon-usd"></i>
+			</div>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-md-12 text-center ">
+	  			<c:choose>
+					<c:when test="${menu=='manage' }">
+						<button id="ok" >¼öÁ¤</button>
+					</c:when>
+					<c:otherwise>
+						<button id="addPurchase">±¸¸Å</button>
+					</c:otherwise>
+				</c:choose>
+				<button id="reset" >Ãë¼Ò</button>
+	  		</div>
+		</div>
+		
+		<br/>
+		
+ 	</div>
+ 	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
 
-</form>
 </body>
 </html>

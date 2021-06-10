@@ -66,10 +66,13 @@ public class ProductController {
 		//Business Logic
 		productService.addProduct(product);
 		
-		String realPath = "C:\\Users\\aiacademy\\git\\09project\\09.Model2MVCShop(jQuery)\\src\\main\\webapp\\resources\\upload";
+		String realPath = "C:\\Users\\aiacademy\\git\\11MPJT\\11.Model2MVCShop\\src\\main\\webapp\\images\\uploadFiles";
 		
 		File folder = new File(realPath);
 		file.transferTo(new File(folder, product.getFileName()));
+		
+		model.addAttribute("file", folder);
+		
 		return "forward:/product/addProduct.jsp";
 	}
 	
